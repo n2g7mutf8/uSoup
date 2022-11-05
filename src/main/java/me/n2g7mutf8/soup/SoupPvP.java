@@ -88,7 +88,7 @@ public class SoupPvP extends JavaPlugin {
     private void load() {
         PvPDB = new MongoBase(settings);
         serverData = new ServerData(settings);
-        messageDB = new MessageDB();
+        messageDB = new MessageDB(messages);
         setAridiManager(new AridiManager(new SideBar()));
         new KitPvPCache();
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");

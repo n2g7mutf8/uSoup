@@ -17,6 +17,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class DeathListener implements Listener {
 
+    private final SoupPvP plugin = SoupPvP.getInstance();
+
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
@@ -26,7 +28,7 @@ public class DeathListener implements Listener {
         Profile killerProfile = ProfileManager.getProfile(killer);
 
         if (profile.getCurrentKillstreak() >= 5) {
-            Bukkit.broadcastMessage(MessageDB.killstreakMessage(player, killer, profile.getCurrentKillstreak(), true));
+            Bukkit.broadcastMessage(plugin.getMessageDB().killstreakMessage(player, killer, profile.getCurrentKillstreak(), true));
         }
         int credits = KitPvPUtils.getRandomNumber(25) + 1;
 
@@ -46,7 +48,7 @@ public class DeathListener implements Listener {
             profile.setBounty(0);
         }
         if (killerProfile.getCurrentKillstreak() / 5 == 0) {
-            Bukkit.broadcastMessage(MessageDB.killstreakMessage(player, null, killerProfile.getCurrentKillstreak(), false));
+            Bukkit.broadcastMessage(plugin.getMessageDB().killstreakMessage(player, null, killerProfile.getCurrentKillstreak(), false));
         }
 
         killer.sendMessage(ColorText.translate("&7You killed &c" + player.getName() + " &7for &$" + credits + "&7!"));

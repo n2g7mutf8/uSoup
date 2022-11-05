@@ -14,20 +14,22 @@ import java.util.HashMap;
 @Getter
 public class MessageDB {
 
-    private static final Config config = SoupPvP.getInstance().getMessages();
+    private final Config config;
     public HashMap<String, String> messages = new HashMap<>();
 
-    public MessageDB() {
+    public MessageDB(Config config) {
+        this.config = config;
+
         registerMessage("actionDeny", "Error.Action-Deny");
         registerMessage("insufficientAmount", "Error.Insufficient-Amount");
         registerMessage("insufficientPermission", "Error.Insufficient-Permission");
     }
 
-    public static String remainCooldownMessage(Player player, Cooldown cooldown) {
+    public String remainCooldownMessage(Player player, Cooldown cooldown) {
         return new MessageUtil().setVariable("<time>", DurationFormatter.getRemaining(cooldown.getDuration(player), true)).format(config.getString("Error.Cooldown-Remain"));
     }
 
-    public static String killstreakMessage(Player player, Player killer, int amount, boolean isEnd) {
+    public String killstreakMessage(Player player, Player killer, int amount, boolean isEnd) {
         if (isEnd) {
             return new MessageUtil().setVariable("<victim>", player.getName()).setVariable("<killer>", killer.getName()).setVariable("<amount>", String.valueOf(amount)).format(config.getString("Streak.Streak-End"));
         } else {

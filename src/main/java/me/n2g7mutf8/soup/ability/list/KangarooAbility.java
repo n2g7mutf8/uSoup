@@ -16,6 +16,8 @@ import org.bukkit.util.Vector;
 
 public class KangarooAbility extends Ability {
 
+    private final SoupPvP plugin = SoupPvP.getInstance();
+
     String cooldown, displayName;
     Material activationMaterial;
 
@@ -60,7 +62,7 @@ public class KangarooAbility extends Ability {
 
         if (player.isOnGround()) {
             if (cooldown.isOnCooldown(player)) {
-                player.sendMessage(MessageDB.remainCooldownMessage(player, cooldown));
+                player.sendMessage(plugin.getMessageDB().remainCooldownMessage(player, cooldown));
                 return false;
             } else {
                 cooldown.setCooldown(player);

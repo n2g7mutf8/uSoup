@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ThorAbility extends Ability {
 
+    private final SoupPvP plugin = SoupPvP.getInstance();
+
     String cooldown, displayName;
     int damage;
     int maxRange;
@@ -71,7 +73,7 @@ public class ThorAbility extends Ability {
         Cooldown cooldown = SoupPvP.getCooldown("Thor");
 
         if (cooldown.isOnCooldown(var1)) {
-            var1.sendMessage(MessageDB.remainCooldownMessage(var1, cooldown));
+            var1.sendMessage(plugin.getMessageDB().remainCooldownMessage(var1, cooldown));
             return false;
         } else {
             cooldown.setCooldown(var1, true);
