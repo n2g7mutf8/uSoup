@@ -72,8 +72,11 @@ public class SoupPvP extends JavaPlugin {
         abilities = new Config(this, "abilities.yml");
         kits = new Config(this, "kits.yml");
         load();
-
         inventoryAPI.init();
+
+        new KitPvPCache();
+        new AbilityManager();
+        new KitLoader().loadKits();
     }
 
     @Override
@@ -90,7 +93,6 @@ public class SoupPvP extends JavaPlugin {
         serverData = new ServerData(settings);
         messageDB = new MessageDB(messages);
         setAridiManager(new AridiManager(new SideBar()));
-        new KitPvPCache();
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");
         new Cooldown("Combat", TimeUtils.parse(settings.getInt("General.Combat-Timer") + "s"), "&cCombat", "&7You are out of &acombat&7.");
 
@@ -137,9 +139,6 @@ public class SoupPvP extends JavaPlugin {
                 }
             }
         }, 0, settings.getInt("General.Save-Timer") * 20L);
-
-        new AbilityManager();
-        new KitLoader().loadKits();
 
         for (World world : Bukkit.getWorlds()) {
             world.setStorm(false);
