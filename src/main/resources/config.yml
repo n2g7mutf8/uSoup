@@ -11,3 +11,12 @@ General:
   Combar-Timer: 20
   #Spawn timer time (second)
   Spawn-Timer: 8
+Location:
+  #If this was enbaled the plugin will save all of these location into the database
+  Is-MongoDB: false
+  #If the option above is disabled the server will save data below this comment
+  Spawn:
+    Location: " "
+    Corner-1: " "
+    Corner-2: " "
+  Boss-Spawn: " "

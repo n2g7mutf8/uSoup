@@ -65,6 +65,9 @@ public class SoupPvP extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        settings = new Config(this, "config.yml");
+        abilities = new Config(this, "abilities.yml");
+        kits = new Config(this, "kits.yml");
         load();
 
         inventoryAPI.init();
@@ -80,11 +83,8 @@ public class SoupPvP extends JavaPlugin {
     }
 
     private void load() {
-        settings = new Config(this, "config.yml");
-        abilities = new Config(this, "abilities.yml");
-        kits = new Config(this, "kits.yml");
         PvPDB = new MongoBase(settings);
-        serverData = new ServerData();
+        serverData = new ServerData(settings);
         setAridiManager(new AridiManager(new SideBar()));
         new KitPvPCache();
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");
