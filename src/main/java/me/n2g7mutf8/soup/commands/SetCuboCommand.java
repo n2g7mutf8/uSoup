@@ -29,9 +29,11 @@ public class SetCuboCommand extends KitPvPCommand {
             ServerData serverData = SoupPvP.getInstance().getServerData();
             if (args[0].equalsIgnoreCase("first")) {
                 serverData.setFirstCI(LocationUtils.getString(player.getLocation()));
+                serverData.saveServer();
                 player.sendMessage(ColorText.translate("&7Successfully setting the &alocation&7."));
             } else if (args[0].equalsIgnoreCase("second")) {
                 serverData.setSecondCI(LocationUtils.getString(player.getLocation()));
+                serverData.saveServer();
                 player.sendMessage(ColorText.translate("&7Successfully setting the &alocation&7."));
             } else {
                 player.sendMessage(ColorText.translate("&cUsage: /" + label + " <first|second|firstKoth|secondKoth>"));
