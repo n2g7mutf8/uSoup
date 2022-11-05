@@ -11,7 +11,7 @@ import org.bukkit.Location;
 @Data
 public class ServerData {
 
-    private String spawn, spawnPractice, spawnBoss, firstCI, secondCI;
+    private String spawn, spawnBoss, firstCI, secondCI;
     private boolean freeKitsMode;
 
     public ServerData() {
@@ -23,9 +23,6 @@ public class ServerData {
         if (document != null) {
             if (document.containsKey("spawn")) {
                 spawn = document.getString("spawn");
-            }
-            if (document.containsKey("spawnPractice")) {
-                spawnPractice = document.getString("spawnPractice");
             }
             if (document.containsKey("spawnBoss")) {
                 spawnBoss = document.getString("spawnBoss");
@@ -46,9 +43,6 @@ public class ServerData {
         }
         if (spawnBoss != null) {
             document.put("spawnBoss", spawnBoss);
-        }
-        if (spawnPractice != null) {
-            document.put("spawnPractice", spawnPractice);
         }
         if (firstCI != null) {
             document.put("firstCI", firstCI);
