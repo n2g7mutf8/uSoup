@@ -1,0 +1,79 @@
+#----------------------------------------
+# Kits Configuration Section (Modifiable)
+#----------------------------------------
+
+Kits:
+  PvP:
+    Item: DIAMOND_SWORD
+    Price: 0
+    Selection-Cooldown: 0
+    Armor:
+      Helmet: 'IRON_HELMET : 1'
+      Chestplate: 'IRON_CHESTPLATE : 1'
+      Leggings: 'IRON_LEGGINGS : 1'
+      Boots: 'IRON_BOOTS : 1'
+    Items:
+      - 'DIAMOND_SWORD : 1 : enchant:DAMAGE_ALL:1'
+      - AUTO_FILL_HEAL_ITEM
+    Abilities: [ ]
+    Potion-Effects: [ ]
+    Description:
+      - '&bA very basic but strong kit!'
+    Archer:
+      Item: BOW
+      Price: 100
+      Selection-Cooldown: 0
+      Armor:
+        Helmet: 'LEATHER_HELMET : 1'
+        Chestplate: 'LEATHER_CHESTPLATE : 1'
+        Leggings: 'IRON_LEGGINGS : 1'
+        Boots: 'IRON_BOOTS : 1'
+      Items:
+        - 'DIAMOND_SWORD : 1'
+        - 'BOW : 1 : enchant:ARROW_DAMAGE:1'
+        - 'ARROW : 64'
+        - AUTO_FILL_HEAL_ITEM
+      Abilities: [ ]
+      Potion-Effects: [ ]
+      Description:
+        - '&bStart with a sword and a strong bow'
+        - '&band a stack of arrows'
+    Ninja:
+      Item: NETHER_STAR
+      Price: 200
+      Selection-Cooldown: 0
+      Armor:
+        Helmet: 'LEATHER_HELMET : 1 : dye:BLACK'
+        Chestplate: 'CHAINMAIL_CHESTPLATE : 1'
+        Leggings: 'CHAINMAIL_LEGGINGS : 1'
+        Boots: 'DIAMOND_BOOTS : 1'
+      Items:
+        - 'DIAMOND_SWORD : 1'
+        - AUTO_FILL_HEAL_ITEM
+      Abilities: [ ]
+      Potion-Effects:
+        - 'SPEED : 999999 : 2'
+      Executed-Commands: [ ]
+      Description:
+        - '&bStart with a diamond sword'
+        - '&band week armor'
+        - '&bAnd infinite speed 2 potion'
+    Tank:
+      Item: DIAMOND_CHESTPLATE
+      Price: 400
+      Selection-Cooldown: 0
+      Armor:
+        Helmet: 'DIAMOND_HELMET : 1'
+        Chestplate: 'DIAMOND_CHESTPLATE : 1'
+        Leggings: 'DIAMOND_LEGGINGS : 1'
+        Boots: 'DIAMOND_BOOTS : 1'
+      Items:
+        - 'IRON_SWORD : 1'
+        - AUTO_FILL_HEAL_ITEM
+      Abilities: [ ]
+      Potion-Effects:
+        - 'SLOW : 999999 : 2'
+      Description:
+        - '&bStart with diamond armor'
+        - '&band an iron sword'
+        - '&bbut a slowness effect'

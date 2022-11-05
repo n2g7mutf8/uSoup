@@ -1,0 +1,13 @@
+MongoDB:
+  URI: 'your.mongodb.uri'
+General:
+  Default-Kits:
+    - 'PvP'
+    - 'Archer'
+    - 'Tank'
+  #Delay between each save (second)
+  Save-Timer: 6000
+  #Combat timer time (second)
+  Combar-Timer: 20
+  #Spawn timer time (second)
+  Spawn-Timer: 8
