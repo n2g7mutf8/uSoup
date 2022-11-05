@@ -1,5 +1,8 @@
 Error:
+  Action-Deny: "&7You cannot do that!"
   Cooldown-Remain: "&7You have to wait &c<time> &7before you can use this again!"
   Insufficient-Amount: "&7You don't have enough money for that!"
-  Action-Deny: "&7You cannot do that!"
   Insufficient-Permission: "&7You don't have enough permission to do that!"
+Streak:
+  High-Streak: "&a<player> &7is on a killstreak of &b<amount>"
+  Streak-End: "&c<victim>&7's killstreak of &b<amount> &7was ended by &c<killer>&7!"

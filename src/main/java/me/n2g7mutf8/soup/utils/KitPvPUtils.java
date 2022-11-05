@@ -13,15 +13,7 @@ import java.util.stream.Collectors;
 
 public class KitPvPUtils {
 
-    public static String STAFF_PERMISSION = "kitpvp.command.staff";
-    public static String DONATOR_PERMISSION = "kitpvp.donator.";
-    public static String PERMISSION = "kitpvp.command.";
-    public static String KIT_PERMISSION = "kitpvp.kit.";
-    public static String THEME_PERMISSION = "kitpvp.theme.";
-    public static String EVENTS_PERMISSION = "kitpvp.event.";
-    public static String COLOR_PERMISSION = "kitpvp.color.";
-    public static String DEATHS_REASON_PERMISSION = "kitpvp.death.";
-    public static String TAG_PERMISSION = "kitpvp.tag.";
+    public static String STAFF_PERMISSION = "usoup.admin";
     public static String ONLY_PLAYERS = "Players-Only";
 
     public static List<Player> getOnlineStaff() {
@@ -42,14 +34,6 @@ public class KitPvPUtils {
             }
         }
         return players;
-    }
-
-    public static String getPlayerNotFoundMessage(String name) {
-        return ColorText.translate("&6Player with name '&f" + name + "&6' not found.");
-    }
-
-    public static boolean isOnline(OfflinePlayer target) {
-        return target != null && target.isOnline();
     }
 
     public static int getRandomNumber(int random) {

@@ -60,7 +60,7 @@ public class KangarooAbility extends Ability {
 
         if (player.isOnGround()) {
             if (cooldown.isOnCooldown(player)) {
-                player.sendMessage(MessageDB.getRemainCooldown(player, cooldown));
+                player.sendMessage(MessageDB.remainCooldownMessage(player, cooldown));
                 return false;
             } else {
                 cooldown.setCooldown(player);

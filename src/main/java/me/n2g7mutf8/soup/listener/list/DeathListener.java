@@ -1,8 +1,10 @@
 package me.n2g7mutf8.soup.listener.list;
 
+import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
 import me.n2g7mutf8.soup.utils.KitPvPUtils;
+import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.player.PlayerUtils;
 import me.n2g7mutf8.soup.utils.task.TaskUtil;
@@ -24,7 +26,7 @@ public class DeathListener implements Listener {
         Profile killerProfile = ProfileManager.getProfile(killer);
 
         if (profile.getCurrentKillstreak() >= 5) {
-            Bukkit.broadcastMessage(ColorText.translate("&a" + player.getName() + "'s &7killstreak of &a" + profile.getCurrentKillstreak() + " &7was ended by &c" + killer.getName() + "&7!"));
+            Bukkit.broadcastMessage(MessageDB.killstreakMessage(player, killer, profile.getCurrentKillstreak(), true));
         }
         int credits = KitPvPUtils.getRandomNumber(25) + 1;
 
@@ -42,6 +44,9 @@ public class DeathListener implements Listener {
             Bukkit.broadcastMessage(ColorText.translate("&a" + killer.getName() + " &7has claimed a &b$" + profile.getBounty() + " &7bounty on &c" + player.getName() + "&7! "));
             killerProfile.setCredits(killerProfile.getCredits() + profile.getBounty());
             profile.setBounty(0);
+        }
+        if (killerProfile.getCurrentKillstreak() / 5 == 0) {
+            Bukkit.broadcastMessage(MessageDB.killstreakMessage(player, null, killerProfile.getCurrentKillstreak(), false));
         }
 
         killer.sendMessage(ColorText.translate("&7You killed &c" + player.getName() + " &7for &$" + credits + "&7!"));

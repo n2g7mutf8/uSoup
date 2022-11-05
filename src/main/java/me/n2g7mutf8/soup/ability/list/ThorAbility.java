@@ -71,7 +71,7 @@ public class ThorAbility extends Ability {
         Cooldown cooldown = SoupPvP.getCooldown("Thor");
 
         if (cooldown.isOnCooldown(var1)) {
-            var1.sendMessage(MessageDB.getRemainCooldown(var1, cooldown));
+            var1.sendMessage(MessageDB.remainCooldownMessage(var1, cooldown));
             return false;
         } else {
             cooldown.setCooldown(var1, true);

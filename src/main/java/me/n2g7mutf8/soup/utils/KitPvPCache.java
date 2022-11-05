@@ -26,8 +26,9 @@ public class KitPvPCache {
         registerCommand(new KitCommand());
         registerCommand(new KitShopCommand());
         registerCommand(new StatsCommand());
-        registerCommand(new SetCuboCommand());
-        registerCommand(new SetSpawnCommand());
+        registerCommand(new BountyCommand());
+        registerCommand(new SetCuboCommand(), KitPvPUtils.STAFF_PERMISSION + ".setcuboid");
+        registerCommand(new SetSpawnCommand(), KitPvPUtils.STAFF_PERMISSION + ".setspawn");
         registerCommand(new PayCommand());
     }
 
@@ -38,7 +39,7 @@ public class KitPvPCache {
     private void registerCommand(KitPvPCommand axisCommand, String permission) {
         PluginCommand command = getCommand(axisCommand.getName(), javaPlugin);
 
-        command.setPermissionMessage(ColorText.translate("&cNo permission."));
+        command.setPermissionMessage(SoupPvP.getInstance().getMessageDB().getMessages().get("insufficientPermission"));
 
         if (permission != null) {
             command.setPermission(permission.toLowerCase());
