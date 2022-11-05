@@ -1,7 +1,10 @@
 package me.n2g7mutf8.soup.utils.cooldown;
 
+import com.avaje.ebeaninternal.server.core.Message;
 import lombok.Getter;
+import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
+import me.n2g7mutf8.soup.utils.chat.MessageUtil;
 import me.n2g7mutf8.soup.utils.task.TaskUtil;
 import org.bukkit.entity.Player;
 
@@ -80,9 +83,5 @@ public class Cooldown {
             new CooldownExpiredEvent(player, this).setForced(true).call();
         }
         return isOnCooldown(player);
-    }
-
-    public void sendMsg(Player player) {
-        player.sendMessage("");
     }
 }

@@ -1,0 +1,5 @@
+Error:
+  Cooldown-Remain: "&7You have to wait &c<time> &7before you can use this again!"
+  Insufficient-Amount: "&7You don't have enough money for that!"
+  Action-Deny: "&7You cannot do that!"
+  Insufficient-Permission: "&7You don't have enough permission to do that!"

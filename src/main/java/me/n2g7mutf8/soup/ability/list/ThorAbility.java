@@ -4,6 +4,7 @@ import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.ability.Ability;
 import me.n2g7mutf8.soup.enums.PlayerState;
 import me.n2g7mutf8.soup.user.Profile;
+import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.configuration.Config;
 import me.n2g7mutf8.soup.utils.cooldown.Cooldown;
 import me.n2g7mutf8.soup.utils.item.XMaterial;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class ThorAbility extends Ability {
 
-    String cooldown, displayName, cooldownExpire, useDeny;
+    String cooldown, displayName;
     int damage;
     int maxRange;
     Material activationMaterial;
@@ -35,13 +36,11 @@ public class ThorAbility extends Ability {
     public void load(Config var1) {
         this.cooldown = var1.getString("Abilities.Thor.Cooldown");
         this.displayName = var1.getString("Abilities.Thor.Display-Name");
-        this.cooldownExpire = var1.getString("Abilities.Thor.Cooldown-Expire");
-        this.useDeny = var1.getString("Abilities.Thor.Use-Deny");
         this.damage = var1.getInt("Abilities.Thor.Lightning-Damage") * 2;
         this.maxRange = var1.getInt("Abilities.Thor.Strike-Radius");
         this.activationMaterial = (XMaterial.matchXMaterial(var1.getString("Abilities." + this.getName() + ".Activation-Material")).get()).parseMaterial();
 
-        new Cooldown(getName(), TimeUtils.parse(cooldown), displayName, cooldownExpire);
+        new Cooldown(getName(), TimeUtils.parse(cooldown));
     }
 
     public Material getMaterial() {
@@ -72,7 +71,7 @@ public class ThorAbility extends Ability {
         Cooldown cooldown = SoupPvP.getCooldown("Thor");
 
         if (cooldown.isOnCooldown(var1)) {
-            var1.sendMessage(useDeny);
+            var1.sendMessage(MessageDB.getRemainCooldown(var1, cooldown));
             return false;
         } else {
             cooldown.setCooldown(var1, true);

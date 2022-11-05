@@ -16,6 +16,7 @@ import me.n2g7mutf8.soup.sidebar.scoreboard.listeners.AridiListener;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
 import me.n2g7mutf8.soup.utils.KitPvPCache;
+import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.configuration.Config;
 import me.n2g7mutf8.soup.utils.cooldown.Cooldown;
@@ -43,9 +44,10 @@ public class SoupPvP extends JavaPlugin {
     @Getter
     private static SoupPvP instance;
     private final InventoryAPI inventoryAPI = new InventoryAPI(this);
-    private Config settings, abilities, kits;
+    private Config settings, abilities, kits, messages;
     private MongoBase PvPDB;
     private ServerData serverData;
+    private MessageDB messageDB;
     @Setter
     private AridiManager aridiManager;
 
@@ -66,6 +68,7 @@ public class SoupPvP extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         settings = new Config(this, "config.yml");
+        messages = new Config(this, "messages.yml");
         abilities = new Config(this, "abilities.yml");
         kits = new Config(this, "kits.yml");
         load();
@@ -85,6 +88,7 @@ public class SoupPvP extends JavaPlugin {
     private void load() {
         PvPDB = new MongoBase(settings);
         serverData = new ServerData(settings);
+        messageDB = new MessageDB();
         setAridiManager(new AridiManager(new SideBar()));
         new KitPvPCache();
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");
