@@ -1,65 +1,82 @@
 package me.n2g7mutf8.soup.ability.list;
 
+import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.ability.Ability;
 import me.n2g7mutf8.soup.user.Profile;
+import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.configuration.Config;
+import me.n2g7mutf8.soup.utils.cooldown.Cooldown;
 import me.n2g7mutf8.soup.utils.item.XMaterial;
+import me.n2g7mutf8.soup.utils.time.TimeUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.util.Vector;
 
 public class KangarooAbility extends Ability {
 
-    String cooldown, displayName, cooldownExpire, useDeny;
+    String cooldown, displayName;
     Material activationMaterial;
 
-    public KangarooAbility() {
-        activationMaterial = XMaterial.FIREWORK_ROCKET.parseMaterial();
-    }
-
-    @Override
     public String getName() {
-        return "KangarooAbility";
+        return "Kangaroo";
     }
 
-    @Override
     public Material getMaterial() {
-        return activationMaterial;
+        return XMaterial.FIREWORK_ROCKET.parseMaterial();
     }
 
-    @Override
     public EntityType getProjectile() {
         return null;
     }
 
-    @Override
-    public void load(Config var1) {
+    public void load(Config config) {
+        cooldown = config.getString("Abilities." + this.displayName + ".Cooldown");
+        displayName = config.getString("Abilities." + this.displayName + ".Display-Name");
+        activationMaterial = (XMaterial.matchXMaterial(config.getString("Abilities." + this.getName() + ".Activation-Material")).get()).parseMaterial();
 
+        new Cooldown(getName(), TimeUtils.parse(cooldown), displayName, null);
     }
 
-    @Override
     public boolean isAttackActivated() {
         return false;
     }
 
-    @Override
     public boolean isAttackReceiveActivated() {
         return false;
     }
 
-    @Override
     public boolean isDamageActivated() {
         return false;
     }
 
-    @Override
     public boolean isEntityInteractionActivated() {
         return false;
     }
 
-    @Override
-    public boolean execute(Player var1, Profile var2, Event var3) {
-        return false;
+    public boolean execute(Player player, Profile var2, Event event) {
+        Cooldown cooldown = SoupPvP.getCooldown(getName());
+
+        if (player.isOnGround()) {
+            if (cooldown.isOnCooldown(player)) {
+                player.sendMessage(MessageDB.getRemainCooldown(player, cooldown));
+                return false;
+            } else {
+                cooldown.setCooldown(player);
+                Vector var4 = player.getEyeLocation().getDirection();
+                if (player.isSneaking()) {
+                    var4.setY(0.2D);
+                    var4.multiply(4);
+                } else {
+                    var4.setY(1.2D);
+                }
+
+                player.setVelocity(var4);
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }

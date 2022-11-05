@@ -33,14 +33,14 @@ public class ThorAbility extends Ability {
         return "Thor";
     }
 
-    public void load(Config var1) {
-        this.cooldown = var1.getString("Abilities.Thor.Cooldown");
-        this.displayName = var1.getString("Abilities.Thor.Display-Name");
-        this.damage = var1.getInt("Abilities.Thor.Lightning-Damage") * 2;
-        this.maxRange = var1.getInt("Abilities.Thor.Strike-Radius");
-        this.activationMaterial = (XMaterial.matchXMaterial(var1.getString("Abilities." + this.getName() + ".Activation-Material")).get()).parseMaterial();
+    public void load(Config config) {
+        this.cooldown = config.getString("Abilities" + this.displayName + "Cooldown");
+        this.displayName = config.getString("Abilities" + this.displayName + "Display-Name");
+        this.damage = config.getInt("Abilities" + this.displayName + "Lightning-Damage") * 2;
+        this.maxRange = config.getInt("Abilities" + this.displayName + "Strike-Radius");
+        this.activationMaterial = (XMaterial.matchXMaterial(config.getString("Abilities." + this.getName() + ".Activation-Material")).get()).parseMaterial();
 
-        new Cooldown(getName(), TimeUtils.parse(cooldown));
+        new Cooldown(getName(), TimeUtils.parse(cooldown), displayName, null);
     }
 
     public Material getMaterial() {

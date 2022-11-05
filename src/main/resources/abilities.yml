@@ -8,5 +8,8 @@ Abilities:
     Lightning-Damage: 8
     Cooldown: "15s"
     Display-Name: "&9Thor"
-    Cooldown-Expire: "&7Your &3Thor &7ability cooldown has expired."
-    Use-Deny: "&7Your &3Thor &7ability still on cooldown!"
+    Activation-Material: "WOODEN_AXE"
+  Kanagroo:
+    Cooldown: "10s"
+    Display-Name: "&cKangaroo"
+    Activation-Material: "FIREWORK_ROCKET"

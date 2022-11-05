@@ -1,7 +1,7 @@
 package me.n2g7mutf8.soup.ability;
 
 import me.n2g7mutf8.soup.SoupPvP;
-import me.n2g7mutf8.soup.ability.list.ThorAbility;
+import me.n2g7mutf8.soup.ability.list.*;
 import me.n2g7mutf8.soup.kit.Kit;
 import me.n2g7mutf8.soup.kit.KitHandler;
 import me.n2g7mutf8.soup.user.ProfileManager;
@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-
 
 public class AbilityManager {
 
@@ -21,6 +20,7 @@ public class AbilityManager {
         instance = this;
         this.abilities = new HashMap<>();
         registerAbility(new ThorAbility());
+        registerAbility(new KangarooAbility());
         Bukkit.getPluginManager().registerEvents(new AbilityListener(SoupPvP.getInstance()), SoupPvP.getInstance());
         Bukkit.getPluginManager().registerEvents(new SpecialAbilityListener(SoupPvP.getInstance()), SoupPvP.getInstance());
     }
