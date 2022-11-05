@@ -1,5 +1,5 @@
 # uSoup
-A basic kitpvp core with lots of customization
+A basic SoupPvP core with lots of customization
 
 # Installation
 Download the .jar file through Spigot or Release on this page. Drop it into your server plugins folder then restart. When the restart completed open this plugin folder
