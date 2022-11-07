@@ -71,13 +71,16 @@ public class SoupPvP extends JavaPlugin {
         messages = new Config(this, "messages.yml");
         abilities = new Config(this, "abilities.yml");
         kits = new Config(this, "kits.yml");
-        load();
         inventoryAPI.init();
+
+        PvPDB = new MongoBase(settings);
+        serverData = new ServerData(settings);
+        messageDB = new MessageDB(messages);
 
         new KitPvPCache();
         new AbilityManager();
         new KitLoader().loadKits();
-        
+
         ListenerHandler.registerListeners(
                 new CooldownListener(),
                 new CoreListener(),
@@ -86,21 +89,8 @@ public class SoupPvP extends JavaPlugin {
                 new WorldListener(),
                 new GameListener()
         );
-    }
 
-    @Override
-    public void onDisable() {
-        for (Profile profile : ProfileManager.getProfileMap().values()) {
-            ProfileManager.saveProfile(profile, false);
-        }
 
-        serverData.saveServer();
-    }
-
-    private void load() {
-        PvPDB = new MongoBase(settings);
-        serverData = new ServerData(settings);
-        messageDB = new MessageDB(messages);
         setAridiManager(new AridiManager(new SideBar()));
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");
         new Cooldown("Combat", TimeUtils.parse(settings.getInt("General.Combat-Timer") + "s"), "&cCombat", "&7You are out of &acombat&7.");
@@ -151,5 +141,14 @@ public class SoupPvP extends JavaPlugin {
                 }
             });
         }
+    }
+
+    @Override
+    public void onDisable() {
+        for (Profile profile : ProfileManager.getProfileMap().values()) {
+            ProfileManager.saveProfile(profile, false);
+        }
+
+        serverData.saveServer();
     }
 }
