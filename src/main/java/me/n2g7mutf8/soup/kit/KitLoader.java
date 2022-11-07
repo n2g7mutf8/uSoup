@@ -87,7 +87,12 @@ public class KitLoader {
                         if (itemCounter == items.length) {
                             break;
                         }
-                        items[itemCounter++] = desc.isEmpty() ? new ItemStack(Material.AIR) : StringItem.getItemStack(desc, true, true);
+                        if (desc.isEmpty()) {
+                            assert XMaterial.AIR.parseMaterial() != null;
+                            items[itemCounter++] = new ItemStack(XMaterial.AIR.parseMaterial());
+                        } else {
+                            items[itemCounter++] = StringItem.getItemStack(desc, true, true);
+                        }
                     } catch (Exception var19) {
                         Bukkit.getConsoleSender().sendMessage("[Soup] Failed to create this item: " + desc + " for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
                         var19.printStackTrace();

@@ -9,43 +9,43 @@ import java.util.Optional;
 
 public class StringItem {
 
-    public static ItemStack getItemStack(String var0, boolean var1, boolean var2) {
+    public static ItemStack getItemStack(String var0, boolean isMultiple, boolean hasItemMeta) {
         String[] var3 = var0.split(" : ");
-        String var4 = var3[0].toUpperCase();
+        String materialValue = var3[0].toUpperCase();
         ItemMaker var5;
-        String var7;
+        String materialString;
 
-        Optional<XMaterial> var8 = XMaterial.matchXMaterial(var4);
-        if (!var8.isPresent() && var4.contains(":")) {
-            var8 = XMaterial.matchXMaterial(var4.split(":")[0]);
+        Optional<XMaterial> material = XMaterial.matchXMaterial(materialValue);
+        if (!material.isPresent() && materialValue.contains(":")) {
+            material = XMaterial.matchXMaterial(materialValue.split(":")[0]);
         }
 
-        var5 = new ItemMaker(var8.get().parseMaterial());
+        var5 = material.map(xMaterial -> new ItemMaker(xMaterial.parseMaterial())).orElseGet(() -> new ItemMaker(XMaterial.WOODEN_SWORD.parseMaterial()));
         if (var3[0].contains(":")) {
-            var7 = var4.split(":")[0];
-            if ((var7.contains("POTION") || var7.equals("TIPPED_ARROW")) && var4.split(":").length == 4) {
+            materialString = materialValue.split(":")[0];
+            if ((materialString.contains("POTION") || materialString.equals("TIPPED_ARROW")) && materialValue.split(":").length == 4) {
                 var5.setDisplayname("Not Supported!");
             } else {
-                var5.setDurability(Integer.parseInt(var4.split(":")[1]));
+                var5.setDurability(Integer.parseInt(materialValue.split(":")[1]));
             }
         }
 
-        if (var1) {
+        if (isMultiple) {
             var5.setAmount(Integer.parseInt(var3[1]));
         }
 
-        if (var2) {
-            for (int var9 = var1 ? 2 : 1; var9 < var3.length; ++var9) {
-                var7 = var3[var9].split(":")[0].toLowerCase();
-                if (var7.equals("enchant")) {
+        if (hasItemMeta) {
+            for (int var9 = isMultiple ? 2 : 1; var9 < var3.length; ++var9) {
+                materialString = var3[var9].split(":")[0].toLowerCase();
+                if (materialString.equals("enchant")) {
                     var5.setEnchant(Enchantment.getByName(var3[var9].split(":")[1]), Integer.parseInt(var3[var9].split(":")[2]));
-                } else if (var7.equals("name")) {
+                } else if (materialString.equals("name")) {
                     var5.setDisplayname(var3[var9].split(":")[1]);
-                } else if (var7.equals("lore")) {
+                } else if (materialString.equals("lore")) {
                     var5.addLore(new String[]{ColorText.translate(var3[var9].split(":")[1])});
-                } else if (var7.equals("dye")) {
+                } else if (materialString.equals("dye")) {
                     var5.setColor(getColor(var3[var9].split(":")[1]));
-                } else if (var7.equals("tag") && var3[var9].split(":")[1].equalsIgnoreCase("unbreakable")) {
+                } else if (materialString.equals("tag") && var3[var9].split(":")[1].equalsIgnoreCase("unbreakable")) {
                     var5.setUnbreakable(true);
                 }
             }
