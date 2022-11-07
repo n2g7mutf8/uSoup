@@ -102,7 +102,7 @@ public class GameListener implements Listener {
                         Kit kit = (profile.getLastKit() != null ? profile.getLastKit() : KitHandler.getByName("PvP"));
                         assert kit != null;
                         if (kit.getPermission() != null && !player.hasPermission(kit.getPermission())) {
-                            kit = KitHandler.getByName("PvP");
+                            kit = KitHandler.getRandomKit(player);
                         }
                         if (kit != null) {
                             kit.equipKit(player);

@@ -77,6 +77,15 @@ public class SoupPvP extends JavaPlugin {
         new KitPvPCache();
         new AbilityManager();
         new KitLoader().loadKits();
+        
+        ListenerHandler.registerListeners(
+                new CooldownListener(),
+                new CoreListener(),
+                new DeathListener(),
+                new SignListener(),
+                new WorldListener(),
+                new GameListener()
+        );
     }
 
     @Override
@@ -95,15 +104,6 @@ public class SoupPvP extends JavaPlugin {
         setAridiManager(new AridiManager(new SideBar()));
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");
         new Cooldown("Combat", TimeUtils.parse(settings.getInt("General.Combat-Timer") + "s"), "&cCombat", "&7You are out of &acombat&7.");
-
-        ListenerHandler.registerListeners(
-                new CooldownListener(),
-                new CoreListener(),
-                new DeathListener(),
-                new SignListener(),
-                new WorldListener(),
-                new GameListener()
-        );
 
         Bukkit.getPluginManager().registerEvents(new ItemMaker.ItemMakerListener(), this);
         TaskUtil.runTaskLater(new BukkitRunnable() {

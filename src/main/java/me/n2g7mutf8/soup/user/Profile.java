@@ -22,7 +22,7 @@ import java.util.UUID;
 @Setter
 public class Profile {
 
-    private final Config config = SoupPvP.getInstance().getSettings();
+    private final SoupPvP plugin = SoupPvP.getInstance();
 
     private final UUID uniqueId;
     private Kit currentKit, lastKit;
@@ -42,13 +42,8 @@ public class Profile {
         this.scoreboardEnabled = true;
         this.playerState = PlayerState.SPAWN;
 
-        for (String name : config.getStringList("General.Default-Kits")) {
-            Kit kit = KitHandler.getByName(name);
+        unlockedKits.addAll(plugin.getServerData().getDefaultKits());
 
-            if (kit != null) {
-                unlockedKits.add(kit);
-            }
-        }
         loadProfile();
     }
 

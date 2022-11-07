@@ -3,6 +3,8 @@ package me.n2g7mutf8.soup;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 import lombok.Data;
+import me.n2g7mutf8.soup.kit.Kit;
+import me.n2g7mutf8.soup.kit.KitHandler;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.configuration.Config;
 import me.n2g7mutf8.soup.utils.cuboid.Cuboid;
@@ -11,6 +13,9 @@ import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class ServerData {
 
@@ -18,9 +23,11 @@ public class ServerData {
 
     private String spawn, spawnBoss, firstCI, secondCI;
     private boolean freeKitsMode;
+    private List<Kit> defaultKits;
 
     public ServerData(Config config) {
         this.config = config;
+        defaultKits = new ArrayList<>();
         loadServer();
     }
 
@@ -62,6 +69,13 @@ public class ServerData {
                     secondCI = document.getString("secondCI");
                 }
             }
+        }
+
+        for (String kitName : config.getStringList("General.Default-Kits")) {
+            Kit kit = KitHandler.getByName(kitName);
+
+            if (kit == null) continue;
+            defaultKits.add(kit);
         }
     }
 
