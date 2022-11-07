@@ -49,7 +49,7 @@ public class Kit {
         this.items = items;
         this.armor = armor;
         this.effects = effects;
-        this.permission = "soupbattle.kit." + name.toLowerCase().replace(" ", "_");
+        this.permission = "usoup.kit." + name.toLowerCase().replace(" ", "_");
 
         loadAbilities();
         generateLogo();

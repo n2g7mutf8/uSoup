@@ -2,7 +2,6 @@ package me.n2g7mutf8.soup.utils;
 
 import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.commands.*;
-import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.command.KitPvPCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
@@ -29,6 +28,7 @@ public class KitPvPCache {
         registerCommand(new BountyCommand());
         registerCommand(new SetCuboCommand(), KitPvPUtils.STAFF_PERMISSION + ".setcuboid");
         registerCommand(new SetSpawnCommand(), KitPvPUtils.STAFF_PERMISSION + ".setspawn");
+        registerCommand(new DebugCommand());
         registerCommand(new PayCommand());
     }
 

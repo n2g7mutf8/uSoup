@@ -58,7 +58,7 @@ public class KitLoader {
                         icon.addLore(desc);
                     }
                 } catch (Exception e) {
-                    Bukkit.getConsoleSender().sendMessage("[Soup] Failed to create the logo for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
+                    Bukkit.getConsoleSender().sendMessage("[uSoup] Failed to create the logo for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
                     e.printStackTrace();
                     continue;
                 }
@@ -72,7 +72,7 @@ public class KitLoader {
                         armor[counter] = config.getString("Kits." + name + ".Armor." + splitNode).isEmpty() ? new ItemStack(Material.AIR) : StringItem.getItemStack(config.getString("Kits." + name + ".Armor." + splitNode), true, true);
                         ++counter;
                     } catch (Exception var18) {
-                        Bukkit.getConsoleSender().sendMessage("[Soup] Failed to create a " + splitNode + " for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
+                        Bukkit.getConsoleSender().sendMessage("[uSoup] Failed to create a " + splitNode + " for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
                         var18.printStackTrace();
                     }
                 }
@@ -94,7 +94,7 @@ public class KitLoader {
                             items[itemCounter++] = StringItem.getItemStack(desc, false, true);
                         }
                     } catch (Exception var19) {
-                        Bukkit.getConsoleSender().sendMessage("[Soup] Failed to create this item: " + desc + " for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
+                        Bukkit.getConsoleSender().sendMessage("[uSoup] Failed to create this item: " + desc + " for the kit: " + name + ", due to that, the whole kit wont load!, make sure you have the correct format!");
                         var19.printStackTrace();
                     }
                 }
@@ -113,7 +113,12 @@ public class KitLoader {
                     writtenAbility.add(ability.toLowerCase());
                 }
 
-                KitHandler.registerKits(new Kit(name, price, writtenAbility, icon.create(), items, armor, potionEffects));
+                try {
+                    KitHandler.registerKits(new Kit(name, price, writtenAbility, icon.create(), items, armor, potionEffects));
+                    Bukkit.getLogger().info("[uSoup] Successfully register " + name + "kit!");
+                } catch (Exception exception) {
+                    Bukkit.getLogger().severe("[uSoup] CANNOT REGISTER KIT!");
+                }
             }
         }
 
