@@ -3,6 +3,7 @@ MongoDB:
 General:
   Default-Kits:
     - 'PvP'
+  Kit-To-Equip: "PvP"
   #Delay between each save (second)
   Save-Timer: 6000
   #Combat timer time (second)

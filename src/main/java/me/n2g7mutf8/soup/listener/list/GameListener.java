@@ -99,10 +99,10 @@ public class GameListener implements Listener {
                 if (!serverData.getSpawnCuboID().contains(event.getTo())) {
                     profile.setPlayerState(PlayerState.FIGHTING);
                     if (profile.getCurrentKit() == null) {
-                        Kit kit = (profile.getLastKit() != null ? profile.getLastKit() : KitHandler.getByName("PvP"));
+                        Kit kit = (profile.getLastKit() != null ? profile.getLastKit() : KitHandler.getByName(plugin.getSettings().getString("General.Kit-To-Equip")));
                         assert kit != null;
                         if (kit.getPermission() != null && !player.hasPermission(kit.getPermission())) {
-                            kit = KitHandler.getRandomKit(player);
+                            kit = KitHandler.getByName(plugin.getSettings().getString("General.Kit-To-Equip"));
                         }
                         if (kit != null) {
                             kit.equipKit(player);
