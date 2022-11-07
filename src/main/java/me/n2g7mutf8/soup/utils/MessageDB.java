@@ -14,12 +14,10 @@ import java.util.HashMap;
 @Getter
 public class MessageDB {
 
-    private final Config config;
+    private final Config config = SoupPvP.getInstance().getMessages();
     public HashMap<String, String> messages = new HashMap<>();
 
-    public MessageDB(Config config) {
-        this.config = config;
-
+    public MessageDB() {
         registerMessage("actionDeny", "Error.Action-Deny");
         registerMessage("insufficientAmount", "Error.Insufficient-Amount");
         registerMessage("insufficientPermission", "Error.Insufficient-Permission");

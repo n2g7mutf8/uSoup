@@ -19,14 +19,13 @@ import java.util.List;
 @Data
 public class ServerData {
 
-    private final Config config;
+    private final Config config = SoupPvP.getInstance().getSettings();
 
     private String spawn, spawnBoss, firstCI, secondCI;
     private boolean freeKitsMode;
     private List<Kit> defaultKits;
 
-    public ServerData(Config config) {
-        this.config = config;
+    public ServerData() {
         defaultKits = new ArrayList<>();
         loadServer();
     }
