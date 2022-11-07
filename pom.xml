@@ -9,7 +9,7 @@
     <version>beta1.0</version>
     <packaging>jar</packaging>
 
-    <name>SoupBattle</name>
+    <name>uSoup</name>
 
     <description>This is the best souppvp plugin ever</description>
     <properties>
