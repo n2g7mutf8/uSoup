@@ -6,12 +6,10 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 import lombok.Getter;
 import lombok.Setter;
-import me.n2g7mutf8.soup.ServerData;
 import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.enums.PlayerState;
 import me.n2g7mutf8.soup.kit.Kit;
 import me.n2g7mutf8.soup.kit.KitHandler;
-import me.n2g7mutf8.soup.utils.configuration.Config;
 import org.bson.Document;
 
 import java.util.ArrayList;

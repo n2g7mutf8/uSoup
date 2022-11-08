@@ -14,19 +14,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-public class KitPvPCache {
+public class Cache {
 
     private final JavaPlugin javaPlugin;
     private CommandMap commandMap;
 
-    public KitPvPCache() {
+    public Cache() {
         javaPlugin = SoupPvP.getInstance();
 
         registerCommand(new KitCommand());
         registerCommand(new StatsCommand());
         registerCommand(new BountyCommand());
-        registerCommand(new SetCuboCommand(), KitPvPUtils.STAFF_PERMISSION + ".setcuboid");
-        registerCommand(new SetSpawnCommand(), KitPvPUtils.STAFF_PERMISSION + ".setspawn");
+        registerCommand(new SetCuboCommand(), SoupUtils.STAFF_PERMISSION + ".setcuboid");
+        registerCommand(new SetSpawnCommand(), SoupUtils.STAFF_PERMISSION + ".setspawn");
         registerCommand(new DebugCommand());
         registerCommand(new PayCommand());
     }

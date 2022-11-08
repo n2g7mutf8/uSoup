@@ -15,7 +15,7 @@ import me.n2g7mutf8.soup.sidebar.scoreboard.AridiManager;
 import me.n2g7mutf8.soup.sidebar.scoreboard.listeners.AridiListener;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
-import me.n2g7mutf8.soup.utils.KitPvPCache;
+import me.n2g7mutf8.soup.utils.Cache;
 import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.configuration.Config;
@@ -94,7 +94,7 @@ public class SoupPvP extends JavaPlugin {
         new Cooldown("Spawn", TimeUtils.parse(settings.getInt("General.Spawn-Timer") + "s"), "&9Spawn", "&7You have been teleported to &bSpawn&7.\n&7(If you wish reset your kit, please use &3/resetkit&7)");
         new Cooldown("Combat", TimeUtils.parse(settings.getInt("General.Combat-Timer") + "s"), "&cCombat", "&7You are out of &acombat&7.");
 
-        new KitPvPCache();
+        new Cache();
         new AbilityManager();
         new KitLoader().loadKits();
 

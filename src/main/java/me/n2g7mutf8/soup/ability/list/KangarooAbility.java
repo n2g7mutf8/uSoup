@@ -3,7 +3,6 @@ package me.n2g7mutf8.soup.ability.list;
 import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.ability.Ability;
 import me.n2g7mutf8.soup.user.Profile;
-import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.configuration.Config;
 import me.n2g7mutf8.soup.utils.cooldown.Cooldown;
 import me.n2g7mutf8.soup.utils.item.XMaterial;

@@ -1,7 +1,8 @@
 package me.n2g7mutf8.soup.ability;
 
 import me.n2g7mutf8.soup.SoupPvP;
-import me.n2g7mutf8.soup.ability.list.*;
+import me.n2g7mutf8.soup.ability.list.KangarooAbility;
+import me.n2g7mutf8.soup.ability.list.ThorAbility;
 import me.n2g7mutf8.soup.kit.Kit;
 import me.n2g7mutf8.soup.kit.KitHandler;
 import me.n2g7mutf8.soup.user.ProfileManager;

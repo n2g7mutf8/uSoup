@@ -2,7 +2,7 @@ package me.n2g7mutf8.soup.commands;
 
 import me.n2g7mutf8.soup.ServerData;
 import me.n2g7mutf8.soup.SoupPvP;
-import me.n2g7mutf8.soup.utils.KitPvPUtils;
+import me.n2g7mutf8.soup.utils.SoupUtils;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.command.KitPvPCommand;
 import me.n2g7mutf8.soup.utils.location.LocationUtils;
@@ -19,7 +19,7 @@ public class SetSpawnCommand extends KitPvPCommand {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(KitPvPUtils.ONLY_PLAYERS);
+            sender.sendMessage(SoupUtils.ONLY_PLAYERS);
             return false;
         }
         Player player = (Player) sender;

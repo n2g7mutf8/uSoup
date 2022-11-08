@@ -1,9 +1,7 @@
 package me.n2g7mutf8.soup.utils;
 
 import com.google.common.base.Preconditions;
-import me.n2g7mutf8.soup.utils.chat.ColorText;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class KitPvPUtils {
+public class SoupUtils {
 
     public static String STAFF_PERMISSION = "usoup.admin";
     public static String ONLY_PLAYERS = "Players-Only";

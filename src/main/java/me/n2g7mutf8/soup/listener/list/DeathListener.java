@@ -3,8 +3,7 @@ package me.n2g7mutf8.soup.listener.list;
 import me.n2g7mutf8.soup.SoupPvP;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
-import me.n2g7mutf8.soup.utils.KitPvPUtils;
-import me.n2g7mutf8.soup.utils.MessageDB;
+import me.n2g7mutf8.soup.utils.SoupUtils;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.item.XMaterial;
 import me.n2g7mutf8.soup.utils.player.PlayerUtils;
@@ -53,7 +52,7 @@ public class DeathListener implements Listener {
         if (profile.getCurrentKillstreak() >= 5) {
             Bukkit.broadcastMessage(plugin.getMessageDB().killstreakMessage(player, killer, profile.getCurrentKillstreak(), true));
         }
-        int credits = KitPvPUtils.getRandomNumber(25) + 1;
+        int credits = SoupUtils.getRandomNumber(25) + 1;
 
         profile.setDeaths(profile.getDeaths() + 1);
         profile.setCurrentKillstreak(0);

@@ -1,7 +1,7 @@
 package me.n2g7mutf8.soup.sidebar.scoreboard;
 
 import lombok.Getter;
-import me.n2g7mutf8.soup.utils.KitPvPUtils;
+import me.n2g7mutf8.soup.utils.SoupUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -30,7 +30,7 @@ public class Aridi {
     }
 
     private static String getRandomColor() {
-        return ChatColor.values()[KitPvPUtils.getRandomNumber(ChatColor.values().length)].toString();
+        return ChatColor.values()[SoupUtils.getRandomNumber(ChatColor.values().length)].toString();
     }
 
     public void setUp(Player player) {

@@ -2,7 +2,7 @@ package me.n2g7mutf8.soup.utils.command;
 
 import lombok.Getter;
 import me.n2g7mutf8.soup.SoupPvP;
-import me.n2g7mutf8.soup.utils.KitPvPUtils;
+import me.n2g7mutf8.soup.utils.SoupUtils;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
@@ -55,7 +55,7 @@ public class KitPvPCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(ColorText.translate("&cNo argument found."));
             } else {
                 if (kitPvPArgument.onlyplayers && sender instanceof ConsoleCommandSender) {
-                    Bukkit.getConsoleSender().sendMessage(KitPvPUtils.ONLY_PLAYERS);
+                    Bukkit.getConsoleSender().sendMessage(SoupUtils.ONLY_PLAYERS);
                     return false;
                 }
                 kitPvPArgument.onExecute(sender, label, args);
@@ -104,7 +104,7 @@ public class KitPvPCommand implements CommandExecutor, TabCompleter {
             }
         }
 
-        return KitPvPUtils.getCompletions(args, results);
+        return SoupUtils.getCompletions(args, results);
     }
 
     public String getName() {

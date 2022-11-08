@@ -3,7 +3,7 @@ package me.n2g7mutf8.soup.kit;
 import lombok.Getter;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
-import me.n2g7mutf8.soup.utils.KitPvPUtils;
+import me.n2g7mutf8.soup.utils.SoupUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -31,13 +31,13 @@ public class KitHandler {
     public static Kit getRandomKit(Player player) {
         List<Kit> kits = new ArrayList<>();
         Profile profile = ProfileManager.getProfile(player);
-        Kit kit = getKitList().get(KitPvPUtils.getRandomNumber(getKitList().size()));
+        Kit kit = getKitList().get(SoupUtils.getRandomNumber(getKitList().size()));
         if (kit.getPermission() != null && !player.hasPermission(kit.getPermission()) && !profile.getUnlockedKits().contains(kit)) {
             kits.add(kit);
         }
         if (kits.isEmpty()) {
             return null;
         }
-        return kits.get(KitPvPUtils.getRandomNumber(kits.size()));
+        return kits.get(SoupUtils.getRandomNumber(kits.size()));
     }
 }
