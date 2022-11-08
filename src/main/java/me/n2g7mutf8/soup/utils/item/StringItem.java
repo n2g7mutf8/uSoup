@@ -20,7 +20,7 @@ public class StringItem {
             material = XMaterial.matchXMaterial(materialValue.split(":")[0]);
         }
 
-        var5 = material.map(xMaterial -> new ItemMaker(xMaterial.parseMaterial())).orElseGet(() -> new ItemMaker(XMaterial.WOODEN_SWORD.parseMaterial()));
+        var5 = material.map(xMaterial -> new ItemMaker(xMaterial.parseMaterial())).orElseGet(() -> new ItemMaker(XMaterial.MUSHROOM_STEW.parseMaterial()));
         if (var3[0].contains(":")) {
             materialString = materialValue.split(":")[0];
             if ((materialString.contains("POTION") || materialString.equals("TIPPED_ARROW")) && materialValue.split(":").length == 4) {
