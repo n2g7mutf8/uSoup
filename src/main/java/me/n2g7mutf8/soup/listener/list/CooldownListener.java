@@ -6,6 +6,7 @@ import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
 import me.n2g7mutf8.soup.utils.cooldown.CooldownExpiredEvent;
 import me.n2g7mutf8.soup.utils.location.LocationUtils;
+import me.n2g7mutf8.soup.utils.player.PlayerUtils;
 import me.n2g7mutf8.soup.utils.task.TaskUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -21,15 +22,8 @@ public class CooldownListener implements Listener {
             return;
         }
         Player player = event.getPlayer();
-        Profile profile = ProfileManager.getProfile(player);
-        if (event.getCooldown() == SoupPvP.getCooldown("SpawnTimer")) {
-            Location location = LocationUtils.getLocation(SoupPvP.getInstance().getSettings().getString("Settings.Spawn-Location"));
-            if (location != null) {
-                player.teleport(location);
-            }
-            player.setAllowFlight(false);
-            player.setFlying(false);
-            TaskUtil.runTask(() -> profile.setPlayerState(PlayerState.SPAWN));
+        if (event.getCooldown() == SoupPvP.getCooldown("Spawn")) {
+            TaskUtil.runTask(() -> PlayerUtils.resetPlayer(player, false, true));
         }
         if (event.getCooldown() == SoupPvP.getCooldown("FlyExpire")) {
             player.setAllowFlight(false);

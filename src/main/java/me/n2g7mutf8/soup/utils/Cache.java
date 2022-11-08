@@ -25,6 +25,7 @@ public class Cache {
         registerCommand(new KitCommand());
         registerCommand(new StatsCommand());
         registerCommand(new BountyCommand());
+        registerCommand(new SpawnCommand());
         registerCommand(new SetCuboCommand(), SoupUtils.STAFF_PERMISSION + ".setcuboid");
         registerCommand(new SetSpawnCommand(), SoupUtils.STAFF_PERMISSION + ".setspawn");
         registerCommand(new DebugCommand());
