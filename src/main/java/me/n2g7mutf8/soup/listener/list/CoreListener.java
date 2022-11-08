@@ -37,7 +37,7 @@ public class CoreListener implements Listener {
 
         player.setGameMode(GameMode.SURVIVAL);
 
-        PlayerUtils.resetPlayer(player);
+        PlayerUtils.resetPlayer(player, false, true);
     }
 
     @EventHandler

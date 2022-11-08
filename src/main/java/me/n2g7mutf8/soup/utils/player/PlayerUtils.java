@@ -2,15 +2,20 @@ package me.n2g7mutf8.soup.utils.player;
 
 import me.n2g7mutf8.soup.ServerData;
 import me.n2g7mutf8.soup.SoupPvP;
+import me.n2g7mutf8.soup.enums.PlayerState;
 import me.n2g7mutf8.soup.enums.SpawnItem;
 import me.n2g7mutf8.soup.kit.Kit;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
 import me.n2g7mutf8.soup.utils.item.ItemMaker;
+import me.n2g7mutf8.soup.utils.location.LocationUtils;
+import me.n2g7mutf8.soup.utils.task.TaskUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -22,7 +27,7 @@ public class PlayerUtils {
 
     private static final ServerData serverData = SoupPvP.getInstance().getServerData();
 
-    public static void resetPlayer(Player player) {
+    public static void resetPlayer(Player player, boolean died, boolean spawn) {
         Profile profile = ProfileManager.getProfile(player);
 
         for (PotionEffect effect : player.getActivePotionEffects()) {
@@ -39,6 +44,18 @@ public class PlayerUtils {
         player.setGameMode(GameMode.SURVIVAL);
         player.setAllowFlight(false);
         player.setFlying(false);
+
+        if (died) {
+            player.spigot().respawn();
+            TaskUtil.runTask(() -> ((CraftPlayer) player).getHandle().getDataWatcher().watch(9, (byte) 0));
+        }
+        if (spawn) {
+            Location location = SoupPvP.getInstance().getServerData().getSpawnLocation();
+            if (location != null) {
+                TaskUtil.runTask(() -> profile.setPlayerState(PlayerState.SPAWN));
+                player.teleport(location);
+            }
+        }
 
         Bukkit.getOnlinePlayers().forEach(online -> online.showPlayer(player));
 
@@ -72,7 +89,7 @@ public class PlayerUtils {
 
         profile.setCurrentKit(null);
 
-        player.teleport(serverData.getSpawnLocation());
+        player.teleport(LocationUtils.getLocation(serverData.getSpawn()));
 
         inventory.setItem(0, SpawnItem.KIT_SELECTOR.getItem());
         inventory.setItem(4, SpawnItem.KIT_SHOP.getItem());

@@ -6,14 +6,21 @@ import me.n2g7mutf8.soup.user.ProfileManager;
 import me.n2g7mutf8.soup.utils.KitPvPUtils;
 import me.n2g7mutf8.soup.utils.MessageDB;
 import me.n2g7mutf8.soup.utils.chat.ColorText;
+import me.n2g7mutf8.soup.utils.item.XMaterial;
 import me.n2g7mutf8.soup.utils.player.PlayerUtils;
 import me.n2g7mutf8.soup.utils.task.TaskUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeathListener implements Listener {
 
@@ -26,6 +33,22 @@ public class DeathListener implements Listener {
 
         Profile profile = ProfileManager.getProfile(player);
         Profile killerProfile = ProfileManager.getProfile(killer);
+
+        List<Item> removableStack = new ArrayList<>();
+
+        for (ItemStack stack : event.getDrops()) {
+            if (stack.getType() == XMaterial.MUSHROOM_STEW.parseMaterial()) {
+                removableStack.add(player.getWorld().dropItemNaturally(player.getLocation(), stack));
+            }
+
+            TaskUtil.runTaskLater(new BukkitRunnable() {
+                @Override
+                public void run() {
+                    removableStack.forEach(Entity::remove);
+                }
+            }, 60);
+        }
+        event.getDrops().clear();
 
         if (profile.getCurrentKillstreak() >= 5) {
             Bukkit.broadcastMessage(plugin.getMessageDB().killstreakMessage(player, killer, profile.getCurrentKillstreak(), true));
@@ -56,8 +79,8 @@ public class DeathListener implements Listener {
         TaskUtil.runTaskLater(new BukkitRunnable() {
             @Override
             public void run() {
-                PlayerUtils.resetPlayer(player);
+                PlayerUtils.resetPlayer(player, true, true);
             }
-        }, 5);
+        }, 3);
     }
 }
