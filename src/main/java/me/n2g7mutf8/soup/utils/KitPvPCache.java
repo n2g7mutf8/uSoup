@@ -23,7 +23,6 @@ public class KitPvPCache {
         javaPlugin = SoupPvP.getInstance();
 
         registerCommand(new KitCommand());
-        registerCommand(new KitShopCommand());
         registerCommand(new StatsCommand());
         registerCommand(new BountyCommand());
         registerCommand(new SetCuboCommand(), KitPvPUtils.STAFF_PERMISSION + ".setcuboid");

@@ -127,9 +127,7 @@ public class Kit {
     }
 
     private void generateLogo() {
-        logo = new ItemMaker(originalLogo).create();
-        ItemStack copy = logo;
-        logo = new ItemMaker(copy).addLore(" ", "&a&nClick to select!").create();
-        shopLogo = new ItemMaker(copy).addLore(" ", "&7Cost: &a$" + price, " ", "&a&nClick to purchase!").create();
+        logo = new ItemMaker(originalLogo).addLore(" ", "&a&nClick to select!").create();
+        shopLogo = new ItemMaker(originalLogo).addLore(" ", "&7Cost: &a$" + price).create();
     }
 }

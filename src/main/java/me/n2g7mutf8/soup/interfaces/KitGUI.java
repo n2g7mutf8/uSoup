@@ -5,6 +5,7 @@ import mc.obliviate.inventory.Icon;
 import mc.obliviate.inventory.pagination.PaginationManager;
 import me.n2g7mutf8.soup.enums.SmartSlot;
 import me.n2g7mutf8.soup.kit.Kit;
+import me.n2g7mutf8.soup.kit.KitHandler;
 import me.n2g7mutf8.soup.user.Profile;
 import me.n2g7mutf8.soup.user.ProfileManager;
 import me.n2g7mutf8.soup.utils.item.ItemMaker;
@@ -20,7 +21,7 @@ public class KitGUI extends Gui {
     private final PaginationManager pagination = new PaginationManager(this);
 
     public KitGUI(Player player) {
-        super(player, "kit-gui", "&c&nYour kit", 6);
+        super(player, "kit-gui", "Kits", 6);
     }
 
     @Override
@@ -28,16 +29,28 @@ public class KitGUI extends Gui {
         Profile profile = ProfileManager.getProfile(player);
         pagination.registerPageSlots(SmartSlot.FILL_6.getSlots());
 
-        fillGui(new Icon(XMaterial.GRAY_STAINED_GLASS_PANE.parseItem()), Arrays.asList(SmartSlot.FILL_6.getSlots()));
+        fillGui(new Icon(new ItemMaker(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial()).setDisplayname(" ").create()), Arrays.asList(SmartSlot.FILL_6.getSlots()));
 
-        for (Kit kit : profile.getUnlockedKits()) {
-            Icon icon = new Icon(kit.getLogo());
-            icon.hideFlags();
-            icon.onClick(clickEvent -> {
-                kit.equipKit(player);
-            });
+        for (Kit kit : KitHandler.getKitList()) {
+            if (player.hasPermission(kit.getPermission()) || profile.getUnlockedKits().contains(kit)) {
+                Icon icon = new Icon(kit.getLogo());
+                icon.hideFlags();
+                icon.onClick(clickEvent -> {
+                    kit.equipKit(player);
+                });
 
-            pagination.addItem(icon);
+                pagination.addItem(icon);
+            } else {
+                Icon icon = new Icon(kit.getShopLogo());
+                icon.hideFlags();
+                icon.onClick(clickEvent -> {
+                    if (profile.getCredits() >= kit.getPrice()) {
+                        new ConfirmGUI(player, kit).open();
+                    }
+                });
+
+                pagination.addItem(icon);
+            }
         }
         pagination.update();
 
